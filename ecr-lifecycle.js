@@ -146,10 +146,10 @@ async function main() {
         }
       }
 
-      log(`Images to be RETAINED in ${repoName}:`);
+      log(`Images to be RETAINED in ${repoName}: (${retained.length})`);
       retained.forEach(img => log(`  - ${img.imageDigest} ${img.imageTags?.join(', ') || '[untagged]'}`));
 
-      log(`Images to be DELETED in ${repoName}:`);
+      log(`Images to be DELETED in ${repoName}: (${deleted.length})`);
       deleted.forEach(img => log(`  - ${img.imageDigest} ${img.imageTags?.join(', ') || '[untagged]'}`));
     }
   } catch (err) {
