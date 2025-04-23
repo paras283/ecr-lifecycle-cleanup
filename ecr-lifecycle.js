@@ -18,6 +18,7 @@ const args = process.argv.slice(2);
 const region = getArgValue('--region') || 'us-east-1';
 const retentionDays = parseInt(getArgValue('--retention-days') || '30');
 const tagPrefixes = getArgValue('--tag-prefixes')?.split(',') || ['latest', 'main', 'release', 'dev'];
+const dryRun = args.includes('--dry-run');
 
 function getArgValue(flag) {
   const index = args.indexOf(flag);
@@ -37,8 +38,52 @@ function isTagMatchingPrefixes(tag, prefixes) {
   return prefixes.some(prefix => tag.startsWith(prefix));
 }
 
+function generateLifecyclePolicy(prefixes, retentionDays) {
+  return JSON.stringify({
+    rules: [
+      {
+        rulePriority: 1,
+        description: "Keep last 2 images for important tag prefixes",
+        selection: {
+          tagStatus: "tagged",
+          tagPrefixList: prefixes,
+          countType: "imageCountMoreThan",
+          countNumber: 2
+        },
+        action: { type: "expire" }
+      },
+      {
+        rulePriority: 2,
+        description: "Delete untagged images older than X days",
+        selection: {
+          tagStatus: "untagged",
+          countType: "sinceImagePushed",
+          countUnit: "days",
+          countNumber: retentionDays
+        },
+        action: { type: "expire" }
+      },
+      {
+        rulePriority: 3,
+        description: "Delete tagged images older than X days not matching prefixes",
+        selection: {
+          tagStatus: "tagged",
+          tagPrefixList: prefixes,
+          countType: "sinceImagePushed",
+          countUnit: "days",
+          countNumber: retentionDays
+        },
+        action: { type: "expire" }
+      }
+    ]
+  });
+}
+
 async function main() {
   log(`Fetching ECR repositories in region: ${region}...`);
+  if (dryRun) {
+    log(`Dry-run mode enabled: No lifecycle policies will be applied.`);
+  }
 
   try {
     const reposOutput = await execAsync(`aws ecr describe-repositories --region ${region}`);
@@ -47,6 +92,15 @@ async function main() {
     for (const repo of repos) {
       const repoName = repo.repositoryName;
       log(`Processing repository: ${repoName}`);
+
+      // Apply lifecycle policy if not dry-run
+      const policyText = generateLifecyclePolicy(tagPrefixes, retentionDays);
+      if (!dryRun) {
+        await execAsync(`aws ecr put-lifecycle-policy --repository-name ${repoName} --lifecycle-policy-text '${policyText}' --region ${region}`);
+        log(`Lifecycle policy applied to ${repoName}`);
+      } else {
+        log(`(Dry-run) Lifecycle policy NOT applied to ${repoName}`);
+      }
 
       const imagesOutput = await execAsync(`aws ecr list-images --repository-name ${repoName} --region ${region} --filter tagStatus=ANY --output json`);
       const imageIds = JSON.parse(imagesOutput).imageIds;
@@ -67,7 +121,6 @@ async function main() {
 
       const now = Date.now();
 
-      // Retain last 2 images for each matching prefix
       for (const prefix of tagPrefixes) {
         const matching = taggedImages.filter(img => img.imageTags.some(tag => tag.startsWith(prefix)));
         matching.sort((a, b) => new Date(b.imagePushedAt) - new Date(a.imagePushedAt));
