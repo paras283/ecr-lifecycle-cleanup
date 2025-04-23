@@ -20,7 +20,7 @@ A Node.js script to apply lifecycle policies to AWS Elastic Container Registry (
 
 1. Clone the repository:
 
-git clone https://github.com/paras283/ecr-cleanup-script.git
+git clone https://github.com/paras283/ecr-lifecycle-cleanup.git
 cd ecr-cleanup-script
 
 2. Install dependencies:
