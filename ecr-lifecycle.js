@@ -46,7 +46,7 @@ async function main() {
 
     for (const repo of repos) {
       const repoName = repo.repositoryName;
-      log(`\nProcessing repository: ${repoName}`);
+      log(`Processing repository: ${repoName}`);
 
       const imagesOutput = await execAsync(`aws ecr list-images --repository-name ${repoName} --region ${region} --filter tagStatus=ANY --output json`);
       const imageIds = JSON.parse(imagesOutput).imageIds;
@@ -93,10 +93,10 @@ async function main() {
         }
       }
 
-      log(`\nImages to be RETAINED in ${repoName}:`);
+      log(`Images to be RETAINED in ${repoName}:`);
       retained.forEach(img => log(`  - ${img.imageDigest} ${img.imageTags?.join(', ') || '[untagged]'}`));
 
-      log(`\nImages to be DELETED in ${repoName}:`);
+      log(`Images to be DELETED in ${repoName}:`);
       deleted.forEach(img => log(`  - ${img.imageDigest} ${img.imageTags?.join(', ') || '[untagged]'}`));
     }
   } catch (err) {
