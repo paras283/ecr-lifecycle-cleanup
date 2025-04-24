@@ -7,10 +7,14 @@ const logFilePath = path.join(__dirname, 'logs', 'output.log');
 const logStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 
 function log(message) {
-  const timestamp = new Date().toISOString();
-  const formatted = `[${timestamp}] ${message}`;
-  console.log(formatted);
-  logStream.write(formatted + '\n');
+    const timestamp = new Date().toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false
+      });
+    
+      const formatted = `[${timestamp}] ${message.trim()}`;
+      console.log(formatted);
+      logStream.write(formatted + '\n');
 }
 
 // Parse CLI args

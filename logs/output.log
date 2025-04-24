@@ -1,0 +1,42 @@
+[2025-04-24T05:52:38.336Z] Fetching ECR repositories in region: us-east-1...
+[2025-04-24T05:52:38.343Z] Dry-run mode enabled: No lifecycle policies will be applied.
+[2025-04-24T05:52:42.546Z] Processing repository: my-repo
+[2025-04-24T05:52:42.547Z] (Dry-run) Lifecycle policy NOT applied to my-repo
+[2025-04-24T05:52:47.847Z] Images to be RETAINED in my-repo: (1)
+[2025-04-24T05:52:47.848Z]   - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[2025-04-24T05:52:47.848Z] Images to be DELETED in my-repo: (0)
+[2025-04-24T05:55:18.718Z] Fetching ECR repositories in region: us-east-1...
+[2025-04-24T05:55:18.723Z] Dry-run mode enabled: No lifecycle policies will be applied.
+[2025-04-24T05:55:23.161Z] Processing repository: my-repo
+[2025-04-24T05:55:23.164Z] (Dry-run) Lifecycle policy NOT applied to my-repo
+[2025-04-24T05:55:50.206Z] Images to be RETAINED in my-repo: (1)
+[2025-04-24T05:55:50.206Z]   - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[2025-04-24T05:55:50.207Z] Images to be DELETED in my-repo: (0)
+[2025-04-24T05:57:12.727Z] Fetching ECR repositories in region: us-east-1...
+[2025-04-24T05:57:12.733Z] Dry-run mode enabled: No lifecycle policies will be applied.
+[2025-04-24T05:57:16.652Z] Processing repository: my-repo
+[2025-04-24T05:57:16.653Z] (Dry-run) Lifecycle policy NOT applied to my-repo
+[2025-04-24T05:57:22.009Z] Images to be RETAINED in my-repo: (1)
+[2025-04-24T05:57:22.010Z] - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[2025-04-24T05:57:22.010Z] Images to be DELETED in my-repo: (0)
+[2025-04-24T05:58:10.398Z] Fetching ECR repositories in region: us-east-1...
+[2025-04-24T05:58:10.404Z] Dry-run mode enabled: No lifecycle policies will be applied.
+[2025-04-24T05:58:13.066Z] Processing repository: my-repo
+[2025-04-24T05:58:13.067Z] (Dry-run) Lifecycle policy NOT applied to my-repo
+[2025-04-24T05:58:19.893Z] Images to be RETAINED in my-repo: (1)
+[2025-04-24T05:58:19.893Z] - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[2025-04-24T05:58:19.894Z] Images to be DELETED in my-repo: (0)
+[2025-04-24T06:02:32.163Z] Fetching ECR repositories in region: us-east-1...
+[2025-04-24T06:02:32.170Z] Dry-run mode enabled: No lifecycle policies will be applied.
+[2025-04-24T06:02:34.744Z] Processing repository: my-repo
+[2025-04-24T06:02:34.745Z] (Dry-run) Lifecycle policy NOT applied to my-repo
+[2025-04-24T06:02:39.757Z] Images to be RETAINED in my-repo: (1)
+[2025-04-24T06:02:39.757Z] - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[2025-04-24T06:02:39.757Z] Images to be DELETED in my-repo: (0)
+[24/4/2025, 11:35:44] Fetching ECR repositories in region: us-east-1...
+[24/4/2025, 11:35:44] Dry-run mode enabled: No lifecycle policies will be applied.
+[24/4/2025, 11:35:47] Processing repository: my-repo
+[24/4/2025, 11:35:47] (Dry-run) Lifecycle policy NOT applied to my-repo
+[24/4/2025, 11:35:52] Images to be RETAINED in my-repo: (1)
+[24/4/2025, 11:35:52] - sha256:d356b4995e8a893f618bf4adeadb8fabf56bc9d206f19869aca4863fc0be4fda latest
+[24/4/2025, 11:35:52] Images to be DELETED in my-repo: (0)
